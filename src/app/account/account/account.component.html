@@ -1,0 +1,33 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+
+  <div fxFlex="95%">
+    <div class="container" fxLayout="row" fxLayoutAlign="center none">
+      <h2>Welcome back, {{ currentUser.firstname }} {{ currentUser.lastname }}!</h2>
+    </div>
+
+    <div class="container" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center none">
+      <div fxFlex="40%" class="text-left records animate">
+        <mat-card>
+          <mat-card-title>Account Information</mat-card-title>
+          <mat-card-content>
+            <b>Account Number:</b>{{ currentUser.custref }}<br />
+            <b>Full Name:</b> {{ currentUser.firstname }} {{ currentUser.lastname }}<br />
+            <b>Telephone:</b> {{ currentUser.telephone }}<br />
+            <b>Balance:</b> ${{ currentUser.balance }}<br />
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex="40%" fxLayoutGap="20px" class="text-left records animate">
+        <mat-card>
+          <mat-card-title>Address & Meter Information</mat-card-title>
+          <mat-card-content>
+            <b>Property Code:</b> {{ currentUser.propref }}<br />
+            <b>Full Address:</b> {{ currentUser.addr1 }} {{ currentUser.addr2 }} {{ currentUser.addr3 }} {{ currentUser.addr4 }} {{ currentUser.addr5 }}<br />
+            <b>Meter Type:</b> {{ currentUser.mtrmake }}<br />
+            <b>Meter Serial:</b> <br />
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

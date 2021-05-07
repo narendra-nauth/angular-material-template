@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
@@ -12,60 +12,31 @@ import { of, EMPTY } from 'rxjs';
     providedIn: 'root'
 })
 export class AuthenticationService {
+    base_url  = "https://customers.gwiguyana.com/customer_details/";
+    headers   =  new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization": "Basic Y3VzdG9tZXJfYXBwOjdFOEVCMEQ1Q0I3QjREMzVENDYzRjA0RjFFQ0YzQUIz",
+    });
 
     constructor(private http: HttpClient,
         @Inject('LOCALSTORAGE') private localStorage: Storage) {
     }
 
-    login(email: string, password: string) {
-        return of(true).delay(1000)
-            .pipe(map((/*response*/) => {
-                // set token property
-                // const decodedToken = jwt_decode(response['token']);
-
-                // store email and jwt token in local storage to keep user logged in between page refreshes
-                this.localStorage.setItem('currentUser', JSON.stringify({
-                    token: 'aisdnaksjdn,axmnczm',
-                    isAdmin: true,
-                    email: 'john.doe@gmail.com',
-                    id: '12312323232',
-                    alias: 'john.doe@gmail.com'.split('@')[0],
-                    expiration: moment().add(1, 'days').toDate(),
-                    fullName: 'John Doe'
-                }));
-
-                return true;
-            }));
+    login(account_no: string, last_name: string) {
+        const url = this.base_url + account_no + '/' + last_name.toLowerCase();
+        return this.http.get(`${url}`, {headers: this.headers});
     }
 
     logout(): void {
-        // clear token remove user from local storage to log user out
         this.localStorage.removeItem('currentUser');
     }
 
     getCurrentUser(): any {
-        // TODO: Enable after implementation
-        // return JSON.parse(this.localStorage.getItem('currentUser'));
+        const currentUser = this.localStorage.getItem('currentUser');
+
         return {
-            token: 'aisdnaksjdn,axmnczm',
-            isAdmin: true,
-            email: 'john.doe@gmail.com',
-            id: '12312323232',
-            alias: 'john.doe@gmail.com'.split('@')[0],
+            currentUser: currentUser,
             expiration: moment().add(1, 'days').toDate(),
-            fullName: 'John Doe'
         };
-    }
-
-    passwordResetRequest(email: string) {
-        return of(true).delay(1000);
-    }
-
-    changePassword(email: string, currentPwd: string, newPwd: string) {
-        return of(true).delay(1000);
-    }
-
-    passwordReset(email: string, token: string, password: string, confirmPassword: string): any {
-        return of(true).delay(1000);
     }
 }

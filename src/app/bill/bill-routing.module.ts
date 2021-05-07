@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from '../shared/layout/layout.component';
-import { AccountComponent } from './account/account.component';
+import { BillComponent } from './bill/bill.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', component: AccountComponent },
+      { path: '', component: BillComponent },
     ]
   }
 ];
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AccountRoutingModule { }
+export class BillRoutingModule { }

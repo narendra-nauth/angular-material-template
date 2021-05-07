@@ -9,23 +9,18 @@ const appRoutes: Routes = [
         loadChildren: './auth/auth.module#AuthModule'
     },
     {
-        path: 'dashboard',
-        loadChildren: './dashboard/dashboard.module#DashboardModule',
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'customers',
-        loadChildren: './customers/customers.module#CustomersModule',
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'users',
-        loadChildren: './users/users.module#UsersModule',
-        canActivate: [AuthGuard]
-    },
-    {
         path: 'account',
         loadChildren: './account/account.module#AccountModule',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'bill',
+        loadChildren: './bill/bill.module#BillModule',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'reading',
+        loadChildren: './reading/reading.module#ReadingModule',
         canActivate: [AuthGuard]
     },
     {
@@ -34,18 +29,8 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'typography',
-        loadChildren: './typography/typography.module#TypographyModule',
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'about',
-        loadChildren: './about/about.module#AboutModule',
-        canActivate: [AuthGuard]
-    },
-    {
         path: '**',
-        redirectTo: 'dashboard',
+        redirectTo: 'account',
         pathMatch: 'full'
     }
 ];
